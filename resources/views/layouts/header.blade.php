@@ -56,8 +56,7 @@
                                     <li><a href="Catagori.html">Catagori</a></li>
                                     <li class="hot"><a href="#">Latest</a>
                                         <ul class="submenu">
-                                            <li><a href="product_list.html"> Product list</a></li>
-                                            <li><a href="single-product.html"> Product Details</a></li>
+                                            <li><a href="/shop"> Product list</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="blog.html">Blog</a>

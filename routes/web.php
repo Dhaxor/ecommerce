@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('landing-page');
-});
+Route::get('/', 'LandingPageController@index');
+
+Route::get('/shop', 'ShopController@index')->name('shop.index');
+
+Route::get('/shop/{product}', 'ShopController@show')->name('shop.show');
 
 Auth::routes();
 
