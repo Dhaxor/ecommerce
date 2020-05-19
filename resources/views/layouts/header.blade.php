@@ -98,7 +98,7 @@
                             </li>
                             <li>
                                 <div class="shopping-card">
-                                    <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                                    <a href="/cart"><i class="fas fa-shopping-cart">{{Cart::instance('default')->count()}}</i></a>
                                 </div>
                             </li>
                            <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">Sign in</a></li>

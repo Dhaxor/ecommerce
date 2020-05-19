@@ -55,9 +55,20 @@
                     </div>
                     <p>$5</p>
                 </div>
-              <div class="add_to_cart">
+
+              {{-- <div class="add_to_cart">
                   <a href="#" class="btn_3">add to cart</a>
-              </div>
+              </div> --}}
+                <form action="{{route('cart.store')}}" method="POST">
+                    {{ csrf_field() }}
+                    <div class="add_to_cart">
+                    <input type="hidden" name="id" value="{{$product->id}}">
+                    <input type="hidden" name="name" value="{{$product->name}}">
+                    <input type="hidden" name="price" value="{{$product->price}}">
+                    <button type="submit" class="btn_3">add to cart</button>
+                </div>
+                </form>
+
             </div>
           </div>
         </div>
