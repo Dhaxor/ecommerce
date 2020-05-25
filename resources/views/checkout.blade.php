@@ -139,7 +139,9 @@
               </div>
             </form>
           </div>
+
           <div class="col-lg-4">
+
             <div class="order_box">
               <h2>Your Order</h2>
               <ul class="list">
@@ -148,29 +150,19 @@
                     <span>Total</span>
                   </a>
                 </li>
+                @foreach (Cart::content() as $item)
                 <li>
-                  <a href="#">Fresh Blackberry
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
+                  <a href="#">{{$item->model->name}}
+                  <span class="middle">x{{$item->qty}}</span>
+                  <span class="last">${{$item->model->price}}</span>
                   </a>
                 </li>
-                <li>
-                  <a href="#">Fresh Tomatoes
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Fresh Brocoli
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
-                  </a>
-                </li>
+                @endforeach
               </ul>
               <ul class="list list_2">
                 <li>
                   <a href="#">Subtotal
-                    <span>$2160.00</span>
+                  <span>${{Cart::subtotal()}}</span>
                   </a>
                 </li>
                 <li>
@@ -180,10 +172,11 @@
                 </li>
                 <li>
                   <a href="#">Total
-                    <span>$2210.00</span>
+                  <span>${{Cart::total()}}</span>
                   </a>
                 </li>
               </ul>
+
               <div class="payment_item">
                 <div class="radion_btn">
                   <input type="radio" id="f-option5" name="selector" />
@@ -212,8 +205,55 @@
                 <label for="f-option4">I’ve read and accept the </label>
                 <a href="#">terms & conditions*</a>
               </div>
-              <a class="btn_3" href="#">Proceed to Paypal</a>
+              {{-- <form action="/success" method="POST">
+                <script src="https://js.paystack.co/v1/inline.js"></script>
+              <a class="btn_3" href="#" onclick="payWithPaystack()">Proceed to Paypal</a>
+            </form> --}}
+
+
+<form method="POST" action="{{ route('checkout.store') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
+    <div class="row" style="margin-bottom:40px;">
+        <div class="col-md-8 col-md-offset-2">
+        <input type="hidden" name="email" value="otemuyiwa@gmail.com"> {{-- required --}}
+        <input type="hidden" name="orderID" value="345">
+        <input type="hidden" name="amount" value="800"> {{-- required in kobo --}}
+        <input type="hidden" name="quantity" value="3">
+        <input type="hidden" name="currency" value="NGN">
+        <input type="hidden" name="metadata" value="{{ json_encode($array = ['key_name' => 'value',]) }}" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
+        <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
+        {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
+
+            <input type="hidden" name="_token" value="{{ csrf_token() }}"> {{-- employ this in place of csrf_field only in laravel 5.0 --}}
+
+
+        <p>
+            <button class="btn btn-success btn-lg btn-block" type="submit" value="Pay Now!">
+            <i class="fa fa-plus-circle fa-lg"></i> Pay Now!
+            </button>
+        </p>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
+
           </div>
         </div>
       </div>
@@ -222,5 +262,7 @@
   <!--================End Checkout Area =================-->
 
   @include('layouts.footer')
+
+
 </body>
 </html>

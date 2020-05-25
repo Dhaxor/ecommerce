@@ -26,6 +26,11 @@ Route::post('/cart', 'CartController@store')->name('cart.store');
 
 Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
 
+
+// Route::get('/payment/callback', 'PaymentController@handleGatewayCallback')->name('pay');
+
+Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

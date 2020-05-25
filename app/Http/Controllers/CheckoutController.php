@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Unicodeveloper\Paystack\Facades\Paystack;
 
 class CheckoutController extends Controller
 {
@@ -34,7 +36,19 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $paymentDetails = Paystack::getPaymentData();
+        //   $paymentDetails->create([
+        //     'amount' => Cart::total(),
+        //     'currency' => 'NGN',
+        //     'email'=> $request->email,
+        //      'metadata' => [
+        //          'quantity' => Cart::instance('default')->count(),
+        //      ],
+        // ]);
+
+        return Paystack::getAuthorizationUrl()->redirectNow();
+
+
     }
 
     /**
