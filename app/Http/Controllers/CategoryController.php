@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Product;
 use Illuminate\Http\Request;
-use Unicodeveloper\Paystack\Facades\Paystack;
 
-class CheckoutController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,8 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $user = User::find(1);
-        return view('checkout')->with('user', $user);
+        $products = Product::inRandomOrder()->take(6)->get();
+        return view('category')->with('products',$products);
     }
 
     /**
@@ -38,14 +36,7 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-
-
-        return Paystack::getAuthorizationUrl()->redirectNow();
-        // $paymentDetails = Paystack::getPaymentData();
-
-        //     dd($paymentDetails);
-        // dd($request->all());
-
+        //
     }
 
     /**

@@ -2,24 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Mail\SendMailable;
 use Illuminate\Http\Request;
-use Unicodeveloper\Paystack\Facades\Paystack;
+use Illuminate\Support\Facades\Mail;
 
-class CheckoutController extends Controller
+class MailController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function mail()
     {
-        $user = User::find(1);
-        return view('checkout')->with('user', $user);
-    }
 
+        $name = 'Gain John';
+        Mail::to('emperorduke5@gmail.com ')->send(new SendMailable($name));
+
+        return 'Email was sent';
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -38,14 +34,7 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-
-
-        return Paystack::getAuthorizationUrl()->redirectNow();
-        // $paymentDetails = Paystack::getPaymentData();
-
-        //     dd($paymentDetails);
-        // dd($request->all());
-
+        //
     }
 
     /**

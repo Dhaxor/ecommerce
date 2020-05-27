@@ -75,7 +75,7 @@
             <h3>Billing Details</h3>
             <form class="row contact_form" action="#" method="post" novalidate="novalidate">
               <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="first" name="name" />
+                <input type="text" class="form-control" id="first" name="name"/>
                 <span class="placeholder" data-placeholder="First name"></span>
               </div>
               <div class="col-md-6 form-group p_star">
@@ -101,7 +101,7 @@
                 </select>
               </div>
               <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="add1" name="add1" />
+                <input type="text" class="form-control" id="add1" name="address" />
                 <span class="placeholder" data-placeholder="Address line 01"></span>
               </div>
               <div class="col-md-12 form-group p_star">
@@ -111,13 +111,6 @@
               <div class="col-md-12 form-group p_star">
                 <input type="text" class="form-control" id="city" name="city" />
                 <span class="placeholder" data-placeholder="Town/City"></span>
-              </div>
-              <div class="col-md-12 form-group p_star">
-                <select class="country_select">
-                  <option value="1">District</option>
-                  <option value="2">District</option>
-                  <option value="4">District</option>
-                </select>
               </div>
               <div class="col-md-12 form-group">
                 <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP" />
@@ -212,14 +205,18 @@
 
 
 <form method="POST" action="{{ route('checkout.store') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
+   @foreach (Cart::content() as $item)
+
+
     <div class="row" style="margin-bottom:40px;">
         <div class="col-md-8 col-md-offset-2">
-        <input type="hidden" name="email" value="otemuyiwa@gmail.com"> {{-- required --}}
-        <input type="hidden" name="orderID" value="345">
-        <input type="hidden" name="amount" value="800"> {{-- required in kobo --}}
-        <input type="hidden" name="quantity" value="3">
+        <input type="hidden" name="email" value="{{$user->email}}"> {{-- required --}}
+        <input type="hidden" name="productName" value="{{$item->name}}">
+        <input type="hidden" name="amount" value="{{$item->price}}"> {{-- required in kobo --}}
+        <input type="hidden" name="quantity" value="{{$item->qty}}">
         <input type="hidden" name="currency" value="NGN">
         <input type="hidden" name="metadata" value="{{ json_encode($array = ['key_name' => 'value',]) }}" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
+        @endforeach
         <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
         {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
 

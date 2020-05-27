@@ -27,9 +27,16 @@ Route::post('/cart', 'CartController@store')->name('cart.store');
 Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
 
 
-// Route::get('/payment/callback', 'PaymentController@handleGatewayCallback')->name('pay');
+Route::get('/payment/callback', 'PaymentController@index')->name('pay');
 
 Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
+
+
+Route::get('/category', 'CategoryController@index')->name('category');
+
+
+
+Route::get('/send/email', 'MailController@mail');
 
 Auth::routes();
 

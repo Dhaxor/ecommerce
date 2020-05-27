@@ -52,8 +52,8 @@
                         <div class="main-menu f-right d-none d-lg-block">
                             <nav>
                                 <ul id="navigation">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="Catagori.html">Catagori</a></li>
+                                    <li><a href="/">Home</a></li>
+                                <li><a href="{{route('category')}}">Catagori</a></li>
                                     <li class="hot"><a href="#">Latest</a>
                                         <ul class="submenu">
                                             <li><a href="/shop"> Product list</a></li>
@@ -68,7 +68,7 @@
                                     <li><a href="#">Pages</a>
                                         <ul class="submenu">
                                             <li><a href="login.html">Login</a></li>
-                                            <li><a href="cart.html">Card</a></li>
+                                          <li><a href="{{route('cart.index')}}">Cart</a></li>
                                             <li><a href="elements.html">Element</a></li>
                                             <li><a href="about.html">About</a></li>
                                             <li><a href="confirmation.html">Confirmation</a></li>
